@@ -1,0 +1,16 @@
+<div class="card w-75 mx-auto mt-3 bloo2" id="homeCard">
+    {{#each meal as |recipe| }}
+    <div class="card col-sm shadow-lg" style="border-radius:25px;" id="mealCard">
+        <div class="container">
+        <div class="row">
+            <div class="w-75 text-center">
+                <h1>{{meal.name}}</h1>
+                <p>Click for more Info!</p>
+            </div>
+            <div class="col-sm text-center my-auto">
+                <button type="button" class="btn btn-primary" id="deleteBtn">Delete Meal</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

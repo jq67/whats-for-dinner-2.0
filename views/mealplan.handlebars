@@ -1,0 +1,26 @@
+<!-- i dont know where we are going to use this, but we probably use this multpile times -->
+<!-- this is just the format for the card created that displays meal info-->
+{{#each meals as |meal|}}
+<div class="container">
+        <div class="row">
+            <a href ='http://www.google.com' style="text-decoration: none;">
+            <div class="card col-sm shadow-lg" style="border-radius:25px;" id="mealCard">
+                <div class="container">
+                <div class="row">
+                    <div class="w-75 text-center">
+                        <h1>{{meal.name}}</h1>
+                        <p>Click for more Info!</p>
+                    </div>
+                    <div class="col-sm text-center my-auto">
+                        <button type="button" class="btn btn-primary">Add Meal</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </a>
+        </div>
+    </div>
+{{/each}}
+<!-- i guess we use another one similar to this but instead its something like-->
+{{!-- {{#each mealplan as |dailymeal|}} --}}
+{{!-- when we are showing the the mealplan to the users? the (html) card format would be the same --}}

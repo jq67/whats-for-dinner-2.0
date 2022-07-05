@@ -1,0 +1,31 @@
+<div class="container w-100 h-100">
+    <div class="card w-75 my-3 mx-auto h-auto shadow-lg" id="recipeCard">
+        <div class="card-body">
+            <h1 class="text-center">{{recipe.name}}</h1>
+            <div>
+            <h1 class="merckScript">Recipe</h1>
+            <div class="pbor"></div>
+            <p class="py-3 bloo2">{{recipe.description}}</p>
+            <img src="{{recipe.image}}" alt="{{recipe.description}}">
+            </div>
+            <div>
+            <h2 class="merckScript">Ingredients</h2>
+            <div class="pbor"></div>
+            <p class="bloo2 py-3">{{recipe.ingredients}}}</p>
+            </div>
+            <div>
+            <h2 class="merckScript">Preparation</h2>
+            <div class="pbor"></div>
+            <p class="bloo2 py-3">{{recipe.instructions}}</p>
+            </div>
+            <div>
+            <h2 class="merckScript">Recipe</h2>
+            <div class="pbor"></div>
+            <p class="bloo2 py-3">same as above? steps = list?<!--meal.recipe--></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{!-- can have another div down here if we have a way to find related recipes, or any other info maybe comment section since no more chat? --}}

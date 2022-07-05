@@ -1,0 +1,35 @@
+{{#each Recipe as |dinner|}}
+<p>{{dinner.name}} <span type="button" class="btn btn-primary" id="addMeal">Add to Meals</span></p> <!-- post route for recipe to mealplan -->
+{{/each}}
+
+{{!-- dropdown menu (not sure if it works)--}}
+
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Choose Meal
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    {{#each Recipe as |dinner|}}
+    <a class="dropdown-item" href="#">{{dinner.name}}</a>
+    {{/each}}
+  </div>
+</div>
+
+{{!-- grid with cards (not sure if it works)--}}
+
+<div class="container-fluid">
+<div class="row">
+{{#each Recipe as |dinner|}}
+    <div class="col-sm-3">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{dinner.name}}</h3>
+                <button type="button" class="btn btn-primary" id="addMeal">Add Dinner</button>
+            </div>
+        </div>
+    </div>
+{{/each}}
+</div>
+</div>
+
+<script src='/public/js/addmeal.js'></script>
