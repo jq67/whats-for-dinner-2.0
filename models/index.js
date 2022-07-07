@@ -2,18 +2,19 @@ const User = require('./User');
 const Meal = require('./Meal');
 const Mealplan = require('./Mealplan');
 
-User.hasMany(Mealplan, {
-  foreignKey: 'mealplan'
+User.hasMany(Mealplan);
+
+Mealplan.belongsTo(User, {
+  foreignKey: 'creator',
+  onDelete: 'NO ACTION',
 });
 
-Mealplan.belongsTo(User);
+// Mealplan.hasMany(Meal, {
+//   constraints: false
+// });
 
-Mealplan.hasMany(Meal, {
-  constraints: false
-});
-
-Meal.belongsTo(Mealplan, {
-  constraints: false
-});
+// Meal.belongsTo(Mealplan, {
+//   constraints: false
+// });
 
 module.exports = { User, Meal, Mealplan };

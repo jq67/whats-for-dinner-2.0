@@ -1,4 +1,7 @@
 <div class="card w-75 mx-auto mt-3 bloo2" id="homeCard">
+<div>
+    <button type="button" class="btn btn-primary" id="createPlan">Create Plan</button>
+</div>
     {{#each meals as |meal| }}
     <div class="card col-sm shadow-lg" style="border-radius:25px;" id="mealCard">
         <div class="container">
@@ -8,10 +11,13 @@
                 <p>Click for more Info!</p>
             </div>
             <div class="col-sm text-center my-auto">
-                <button type="button" class="btn btn-primary" id="deleteBtn">Delete Meal</button>
+                <button type="button" class="btn btn-primary addBtn" data-name={{meal.name}}>Add to Mealplan</button>
+                <p class="d-none">{{meal.name}}</p>
             </div>
         </div>
         </div>
     </div>
     {{/each}}
 </div>
+
+<script src="/js/mealplan.js"></script>

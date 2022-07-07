@@ -1,41 +1,42 @@
-const { del } = require("express/lib/application");
+let planArray = []
 
-const addMealHandler = async (event) => {
+const addToPlan = () => {
+    console.log(event.target.textContent)
+    event.target.textContent = "Clicked"
+    const name = event.target.nextElementSibling.textContent;
+    console.log(name)
+    planArray.push(name)
+    console.log(planArray)
+}
+
+document.querySelectorAll('.addBtn').forEach((btn) => {
+    btn.addEventListener('click', addToPlan)
+})
+
+let createBtn = document.querySelector('#createPlan')
+
+const createPlan = async (event) => {
     event.preventDefault();
-    
-    const response = await fetch('/api/meals', { 
-      method: 'POST',
-      body: JSON.stringify({ dinner }), // need to change dinner to proper term
-      headers: { 'Content-Type': 'application/json' },
+
+    let meals = planArray.toString()
+    console.log(meals)
+
+    let creator = 1
+
+    const response = await fetch('/api/plan/new', {
+        method: 'POST',
+        body: JSON.stringify({
+            meals, creator
+        }),
+        headers: { 'Content-Type': 'application/json' },
     });
-  
+
     if (response.ok) {
-      document.location.replace('/mealplan');
+        // If successful, redirect the browser to the profile page
+        document.location.replace('/');
     } else {
-      alert('Failed to create Meal');
-    }
-};
+        alert(response.statusText);
+    };
+}
 
-const delButtonHandler = async (event) => {
-    if (event.target.hasAttribute('data-id')) {
-        const id = event.target.getAttribute('data-id');
-
-        const response = await fetch('/api/projects/${id}', {
-            method: 'DELETE' ,
-        });
-
-        if (response.ok) {
-            document.location.replace('/mealplan');
-        } else {
-            alert ('Failed to delete meal plean');
-        }
-    }
-};
-
-document
-    .querySelector('#addMeal')
-    .addEventListener('click', addMealHandler);
-
-document
-    .querySelector('.mealplan-list')
-    .addEventListener('click', delButtonHandler);
+createBtn.addEventListener('click', createPlan)

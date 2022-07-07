@@ -39,14 +39,10 @@ User.init(
     //   type: DataTypes.STRING,
     //   allowNull: true,
     // },
-    mealplan: {
-      type: DataTypes.INTEGER,
+    planlist: {
+      type: DataTypes.STRING,
       allowNull: true,
-      reference: {
-        model: 'mealplan',
-        key: 'id',
-      }
-    }
+    },
   },
   {
     hooks: {

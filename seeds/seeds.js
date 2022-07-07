@@ -2,6 +2,7 @@ const sequelize = require('../config/connection');
 const { User, Meal, Mealplan } = require('../models');
 const userData = require('./userData.json');
 const mealData = require('./mealData.json');
+const mealplanData = require('./mealplan.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -12,6 +13,8 @@ const seedDatabase = async () => {
   });
 
   await Meal.bulkCreate(mealData)
+
+  await Mealplan.bulkCreate(mealplanData)
 
   process.exit(0);
 }

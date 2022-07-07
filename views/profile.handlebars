@@ -1,31 +1,12 @@
 <div class="card w-75 mx-auto mt-3 bloo2" id="homeCard">
-    <h1>{{user.name}}</h1> <!--{{user.name}}-->
-    <h1>{{user.email}}</h1> <!--{{user.email}-->
-    <h1>{{user.favoriteFood}}</h1> <!--{{user.favorite_food}}-->
+    {{!-- <h1>{{user.name}}</h1> <!--{{user.name}}-->
+    <h1>{{user.email}}</h1> <!--{{user.email}--> --}}
+    {{!-- <h1>{{user.favoriteFood}}</h1> <!--{{user.favorite_food}}--> --}}
     <div class="pbor"></div>
-    <h1>Meal Plan</h1>
-    <div>
-        <!-- {{#each userRecipe as |meal|}} -->
-        <div class="container">
-            <div class="row">
-                <!-- <a href="/recipe/{{recipe.id}}"> -->
-                <a href ='http://www.google.com' style="text-decoration: none;">
-                <div class="card col-sm shadow-lg" style="border-radius:25px;" id="mealCard">
-                    <div class="container">
-                    <div class="row">
-                        <div class="w-75 text-center">
-                            <h1>{{meal.name}}</h1>
-                            <p>Click for more Info!</p>
-                        </div>
-                        <div class="col-sm text-center my-auto">
-                            <button type="button" class="btn btn-primary" id="deleteBtn">Delete Meal</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </a>
-            </div>
-        </div>
-        <!-- {{/each}} -->
-    </div>
+    <h1>Meal Plans</h1>
+    {{#each plan as |mealplan|}}
+    <h1>{{mealplan.name}}</h1>
+    <h2>{{mealplan.meals}}</h2>
+    <h3>{{mealplan.user.username}}</h3>
+    {{/each}}
 </div>

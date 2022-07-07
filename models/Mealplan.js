@@ -15,59 +15,15 @@ Mealplan.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    meal1_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'meal',
-        key: 'id',
-      },
+    meals: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
-    meal2_id: {
+    creator: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'meal',
-        key: 'id',
-      },
-    },
-    meal3_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'meal',
-        key: 'id',
-      },
-    },
-    meal4_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'meal',
-        key: 'id',
-      },
-    },
-    meal5_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'meal',
-        key: 'id',
-      },
-    },
-    meal6_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'meal',
-        key: 'id',
-      },
-    },
-    meal7_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'meal',
+        model: 'user',
         key: 'id',
       },
     },
@@ -78,7 +34,7 @@ Mealplan.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'mealplan'
-  }
+  },
 );
 
 module.exports = Mealplan;
