@@ -2,7 +2,7 @@ let planArray = []
 
 const addToPlan = () => {
     console.log(event.target.textContent)
-    event.target.textContent = "Clicked"
+    event.target.textContent = "Added to Plan!"
     const name = event.target.nextElementSibling.textContent;
     console.log(name)
     planArray.push(name)

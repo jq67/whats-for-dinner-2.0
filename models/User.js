@@ -39,10 +39,12 @@ User.init(
     //   type: DataTypes.STRING,
     //   allowNull: true,
     // },
-    planlist: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+    // planlist: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    //   defaultValue: '',
+
+    // },
   },
   {
     hooks: {

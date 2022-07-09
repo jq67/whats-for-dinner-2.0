@@ -1,6 +1,11 @@
 const router = require('express').Router();
 const { Meal, User, Mealplan } = require('../../models');
 
+const format_mealList = (string) => {
+  let list = string.split(',')
+  return list
+}
+
 // post route to create user
 router.post('/', async (req,res) => {
   try {
@@ -98,24 +103,47 @@ router.get('/mealtest', async (req, res) => {
 // get users plans
 router.get('/:id' , async (req,res) => {
   try {
+      const userData = await User.findOne({ where: { id: req.params.id } })
+
+      const meallist = userData.planlist.split(',')
+
       const planData = await Mealplan.findAll({
-          where: {
-              creator: req.params.id
-          },
-          include: [
-            {
-              model: User,
-              attributes: ['username']
-            },
-          ],
-      });
+        where: {
+          id: meallist
+        }
+      })
 
-      const plan = planData.map((plan) => plan.get({ plain: true }))
+      const plans = planData.map((plan) => plan.get({ plain:true }))
 
-      // res.status(200).json(plan);
-      res.render('profile', { plan } ) 
+      const testList = planData.map((plan) => plan.meals.split(','))
+
+      console.log(JSON.stringify(testList))
+      console.log(plans)
+
+      // res.render('profile', { plans } )
+      res.status(200).json(plans)
   } catch (err) {
       res.status(500).json(err);
+  }
+});
+
+router.post('/:id', async (req,res) => {
+  try {
+    const userData = await User.findOne(
+      { where: { id: req.params.id } }
+    )
+    
+    if (userData.planlist == '') {
+      userData.planlist += `${req.body.planlist}`
+    } else {
+    userData.planlist += `, ${req.body.planlist}`
+    }
+
+    await userData.save();
+    
+    res.status(200).json(userData)
+  } catch (err) {
+    res.status(500).json(err)
   }
 })
 

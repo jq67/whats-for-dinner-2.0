@@ -14,6 +14,7 @@ router.get('/meals', async (req, res) => {
     }
 });
 
+// get all mealplans test
 router.get('/mealtest', async (req, res) => {
     try {
         const planData = await Mealplan.findAll();

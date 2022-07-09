@@ -1,31 +1,31 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Mealplan extends Model {}
+class Mealjoinplan extends Model {}
 
-Mealplan.init(
+Mealjoinplan.init(
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    // meals: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
-    creator: {
+    mealplan_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'user',
-        key: 'id',
-      },
+        model: 'mealplan',
+        key: 'id'
+      }
+    },
+    meal_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'meal',
+        key: 'id'
+      }
     },
   },
   {
@@ -33,8 +33,8 @@ Mealplan.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'mealplan'
-  },
+    modelName: 'mealjoinplan'
+  }
 );
 
-module.exports = Mealplan;
+module.exports = Mealjoinplan;
