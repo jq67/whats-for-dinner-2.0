@@ -20,6 +20,11 @@ Mealplan.init(
       allowNull: true,
       defaultValue: 'Anonymous',
     },
+    count: {
+      type : DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
+    }
   },
   {
     sequelize,

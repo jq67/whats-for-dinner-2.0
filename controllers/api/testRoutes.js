@@ -41,14 +41,14 @@ router.post('/mealplan/create/:id', async (req, res) => {
 });
 
 // adding mealplan to user, will use req.sesson.user_id
-router.post('/mealplan/:planid/:userid', async (req, res) => {
+router.post('/mealplan/:planid/', async (req, res) => {
     try {
-        const addPlan = await Userjoinplan.create({
-            user_id: req.params.userid,
-            mealplan_id: req.params.planid,
-        })
+        // const user = await User.findByPk(req.session.user_id)
+        const user = await User.findByPk(req.session.user_id)
 
-        res.status(200).json(addPlan)
+        user.addMealplan(req.params.planid)
+
+        res.status(200).json(user)
     } catch (err) {
         res.status(500).json(err)
     }
@@ -95,20 +95,20 @@ router.get('/profile/:id', async (req, res) => {
     }
 });
 
-// render all meals
+// render all meals, final route, add session, logged in params
 router.get('/allmeals', async (req,res) => {
     try {
         const mealData = await Meal.findAll();
 
         const meals = mealData.map((meal) => meal.get({plain: true}))
 
-        res.render('genmealplan', { meals })
+        res.render('genmealplan', { meals, logged_in: req.session.logged_in, user_id: req.session.user_id })
     } catch (err) {
         res.status(500).json(err)
     }
 });
 
-// render all plans
+// render all plans, final route, add session logged in params
 router.get('/allplans', async (req,res) => {
     try {
         const planData = await Mealplan.findAll({
@@ -121,13 +121,15 @@ router.get('/allplans', async (req,res) => {
 
         const plans = planData.map((plan) => plan.get({plain: true}))
 
-        res.render('allmealplans', { plans })
+        console.log(req.session.user_id)
+
+        res.render('allmealplans', { plans, logged_in: req.session.logged_in, user_id: req.session.user_id })
     } catch (err) {
         res.status(500).json(err)
     }
 });
 
-// render user profile
+// render user profile, final route, add session, logged in params
 router.get('/userplans', async (req,res) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
@@ -147,13 +149,13 @@ router.get('/userplans', async (req,res) => {
         const user = userData.get({ plain: true });
 
         // res.status(200).json(user)
-        res.render('profile', { user })
+        res.render('profile', { user, logged_in: req.session.logged_in, user_id: req.session.user_id })
     } catch (err) {
         res.status(500).json(err)
     }
 });
 
-
+// create plan add meals, final route, need to add session logged in params, will have to add user.addMealplan
 router.post('/createplan/test', async (req, res) => {
     try {
         const newPlan = await Mealplan.create({
@@ -167,6 +169,23 @@ router.post('/createplan/test', async (req, res) => {
 
         newPlan.addMeals(req.body.meals)
 
+        newPlan.increment({
+            count: 1,
+        });
+        
+        for (let i = 0; i < req.body.meals.length; i++) {
+            Meal.increment(
+                {
+                    count: 1
+                },
+                {
+                    where: {
+                        id: req.body.meals[i]
+                    }
+                }
+            )
+        };
+
         res.status(200).json(newPlan)
 
     } catch (err) {
@@ -174,5 +193,13 @@ router.post('/createplan/test', async (req, res) => {
     }
 });
 
+
+
+
+// todos
+// front end restyling, loop
+// better seed data
+// add checks and preventions to buttons / routes
+// add recipe route
 
 module.exports = router;

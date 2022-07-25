@@ -1,47 +1,23 @@
-let meals = []
-
-const addToPlan = (e) => {
-    e.target.textContent = "Added to Plan!"
+const addToProfile = async (e) => {
     const id = e.target.getAttribute('data-id');
-    console.log(id)
-    meals.push(id)
-    console.log(meals)
-}
 
-document.querySelectorAll('.addBtn').forEach((btn) => {
-    btn.addEventListener('click', addToPlan)
-})
-
-let createBtn = document.querySelector('#createPlan')
-
-const createPlan = async (event) => {
-    event.preventDefault();
-
-    // let meals = planArray.toString()
-    // console.log(meals)
-
-    let creator = 'jq'
-
-    let name = 'browser made plan 1'
-
-    const response = await fetch('/api/test/createplan/test', {
+    const response = await fetch(`/api/test/mealplan/${id}`, {
         method: 'POST',
-        body: JSON.stringify(
-            {
-                name,
-                creator,
-                meals                
-            }
-        ),
         headers: { 'Content-Type': 'application/json' },
+        // body: JSON.stringify(
+
+        // )
     });
 
     if (response.ok) {
-        // If successful, redirect the browser to the profile page
-        document.location.replace('/');
+        e.target.textContent = "Added to Profile!"
     } else {
+        e.target.textContent = "Something went wrong"
         alert(response.statusText);
-    };
+    }
+
 }
 
-createBtn.addEventListener('click', createPlan)
+document.querySelectorAll('.addBtn').forEach((btn) => {
+    btn.addEventListener('click', addToProfile)
+});

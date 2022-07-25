@@ -18,6 +18,11 @@ Meal.init(
     recipe_url: {
       type: DataTypes.STRING,
       allowNull: true,
+    },
+    count: {
+      type : DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
     }
   },
   {

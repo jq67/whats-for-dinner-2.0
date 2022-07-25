@@ -24,9 +24,25 @@ router.get('/users', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    
+    const planCount = await Mealplan.findAll({
+      limit: 5,
+      order: [
+          ['count', 'DESC']
+      ]
+    });
 
-    res.render('homepage', { logged_in: req.session.logged_in, user_id : req.session.user_id });
+    const plans = planCount.map((plan) => plan.get({ plain: true }))
+
+    const mealCount = await Meal.findAll({
+      limit: 5,
+      order: [
+          ['count', 'DESC']
+      ]
+  });
+
+  const meals = mealCount.map((meal) => meal.get({ plain: true }))
+
+    res.render('homepage', { meals, plans, logged_in: req.session.logged_in, user_id : req.session.user_id });
   } catch (err) {
     res.status(500).json(err)
   }
