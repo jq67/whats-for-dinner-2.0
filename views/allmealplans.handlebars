@@ -2,18 +2,29 @@
 <div>
     <button type="button" class="btn btn-primary" id="createPlan">Create Plan</button>
 </div>
-    {{#each meals as |meal| }}
+    {{#each plans as |plan| }}
     <div class="card col-sm shadow-lg" style="border-radius:25px;" id="mealCard">
         <div class="container">
         <div class="row">
             <div class="w-75 text-center">
-                <h1>{{meal.name}}</h1>
+                <h1>{{plan.name}}</h1>
                 <p>Click for more Info!</p>
             </div>
             <div class="col-sm text-center my-auto">
-                <button type="button" class="btn btn-primary addBtn" data-id={{meal.id}}>Add to Mealplan</button>
-                <p class="d-none">{{meal.name}}</p>
+                <button type="button" class="btn btn-primary addBtn" data-name={{plan.name}}>Add to Mealplan</button>
+                <p class="d-none">{{plan.name}}</p>
             </div>
+            {{#if plan.meals}}
+            <ul>
+            {{#each plan.meals as |meal|}}
+            <li>{{meal.name}}</li>
+            {{/each}}
+            </ul>
+            {{else}}
+            <div>
+                <p>none</p>
+            </div>
+            {{/if}}
         </div>
         </div>
     </div>

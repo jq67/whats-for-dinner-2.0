@@ -1,12 +1,11 @@
-let planArray = []
+let meals = []
 
-const addToPlan = () => {
-    console.log(event.target.textContent)
-    event.target.textContent = "Added to Plan!"
-    const name = event.target.nextElementSibling.textContent;
-    console.log(name)
-    planArray.push(name)
-    console.log(planArray)
+const addToPlan = (e) => {
+    e.target.textContent = "Added to Plan!"
+    const id = e.target.getAttribute('data-id');
+    console.log(id)
+    meals.push(id)
+    console.log(meals)
 }
 
 document.querySelectorAll('.addBtn').forEach((btn) => {
@@ -18,16 +17,22 @@ let createBtn = document.querySelector('#createPlan')
 const createPlan = async (event) => {
     event.preventDefault();
 
-    let meals = planArray.toString()
-    console.log(meals)
+    // let meals = planArray.toString()
+    // console.log(meals)
 
-    let creator = 1
+    let creator = 'jq'
 
-    const response = await fetch('/api/plan/new', {
+    let name = 'browser made plan 1'
+
+    const response = await fetch('/api/test/createplan/test', {
         method: 'POST',
-        body: JSON.stringify({
-            meals, creator
-        }),
+        body: JSON.stringify(
+            {
+                name,
+                creator,
+                meals                
+            }
+        ),
         headers: { 'Content-Type': 'application/json' },
     });
 

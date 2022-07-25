@@ -1,26 +1,26 @@
 [
     {
         "name": "test meaplan 1",
-        "creator": 1
+        "creator": "Jacqueline"
     },
     {
         "name": "test meaplan 2",
-        "creator": 2
+        "creator": "Soo"
     },
     {
         "name": "test meaplan 3",
-        "creator": 3
+        "creator": "Julian"
     },
     {
         "name": "test meaplan 4",
-        "creator": 3
+        "creator": "Julian"
     },
     {
         "name": "test meaplan 5",
-        "creator": 1
+        "creator": "Jacqueline"
     },
     {
         "name": "test meaplan 6",
-        "creator": 1
+        "creator": "Soo"
     }
 ]

@@ -1,15 +1,18 @@
 <div class="card w-75 mx-auto mt-3 bloo2" id="homeCard">
     <div class="pbor"></div>
     <h1>Meal Plans</h1>
-    <h1>{{test.test}}</h1>
-    {{#each plans as |mealplan|}}
+    {{#each user.mealplans as |mealplan|}}
     <div class="card">
         <div class="card-header">
             <h2>{{mealplan.name}}</h2>
         </div>
         <div class="card-body">
-            <p class="card-text">Created by: {{mealplan.user.username}}</p>
-            <ul class="card-text">{{mealplan.meals}}</ul>
+            <p class="card-text">Created by: {{mealplan.creator}}</p>
+            <ul class="card-text">
+                {{#each mealplan.meals as |meal|}}
+                <li>{{meal.name}}</li>
+                {{/each}}
+            </ul>
         </div>
     </div>
     {{/each}}

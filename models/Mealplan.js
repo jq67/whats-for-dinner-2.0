@@ -15,17 +15,10 @@ Mealplan.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    // meals: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
     creator: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'user',
-        key: 'id',
-      },
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: 'Anonymous',
     },
   },
   {
