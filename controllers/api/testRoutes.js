@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { Meal, User, Mealplan } = require('../../models');
+const withAuth = require('../../utils/auth');
+const recipeScraper = require("recipe-scraper");
 
 // get all users
 router.get('/allusers', async (req,res) => {
@@ -162,7 +164,7 @@ router.get('/allplans', async (req,res) => {
 });
 
 // render user profile, final route, add session, logged in params
-router.get('/userplans', async (req,res) => {
+router.get('/userplans', withAuth, async (req,res) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] },
@@ -269,9 +271,23 @@ router.get('/view/allmeals', async (req, res) => {
     }
 });
 
+// recipe route
+router.get('/:mealid/recipe', async (req, res) => {
+    try {
+        const meal = await Meal.findByPk(req.params.mealid)
+
+        console.log(meal.recipe_url)
+
+        const recipe = await recipeScraper(meal.recipe_url)
+
+        // res.status(200).json(recipe)
+        res.render('recipe', {recipe, logged_in: req.session.logged_in, user_id: req.session.user_id })
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
 
 // todos
-// front end restyling, loop
 // better seed data
 // add checks and preventions to buttons / routes
 // add recipe route

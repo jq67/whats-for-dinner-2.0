@@ -15,7 +15,7 @@
             {{#if plan.meals}}
             <ul>
             {{#each plan.meals as |meal|}}
-            <li class="lists my-1">{{meal.name}}</li>
+            <li class="lists my-1"><a href="/api/test/{{meal.id}}/recipe">{{meal.name}}</a></li>
             {{/each}}
             </ul>
             {{else}}
