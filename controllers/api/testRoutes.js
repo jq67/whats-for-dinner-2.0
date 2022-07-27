@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Meal, User, Mealplan, Mealjoinplan, Userjoinplan } = require('../../models');
+const { Meal, User, Mealplan } = require('../../models');
 
 // get all users
 router.get('/allusers', async (req,res) => {
@@ -43,16 +43,42 @@ router.post('/mealplan/create/:id', async (req, res) => {
 // adding mealplan to user, will use req.sesson.user_id
 router.post('/mealplan/:planid/', async (req, res) => {
     try {
-        // const user = await User.findByPk(req.session.user_id)
-        const user = await User.findByPk(req.session.user_id)
+        // const user = await User.findByPk(req.params.userid, {
+        const user = await User.findByPk(req.session.user_id, {
+            include: [
+                {
+                    model: Mealplan,
+                }
+            ]
+        });
+        
+        for (let i = 0; i < user.mealplans.length; i++) {
+            if (user.mealplans[i].id == req.params.planid) {
+                return res.status(400).json(user)
+            } else if (i == user.mealplans.length-1) {         
+                user.addMealplan(req.params.planid)
 
-        user.addMealplan(req.params.planid)
+                const plan = await Mealplan.findByPk(req.params.planid)
 
-        const plan = await Mealplan.findByPk(req.params.planid)
+                plan.increment({
+                    count: 1
+                });
 
-        plan.increment({
-            count: 1
-        })
+                return res.status(200).json(user)
+            };
+        };
+
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
+
+// remove plan from user route
+router.delete('/mealplan/:planid', async (req, res) => {
+    try {
+        const user = await User.findByPk(req.session.user_id);
+
+        user.removeMealplan(req.params.planid)
 
         res.status(200).json(user)
     } catch (err) {

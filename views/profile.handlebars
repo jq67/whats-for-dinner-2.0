@@ -4,7 +4,7 @@
     {{#each user.mealplans as |mealplan|}}
     <div class="card m-1">
         <div class="card-header text-center">
-            <h2>{{mealplan.name}}</h2>
+            <h2>{{mealplan.name}}<span class="float-end mx-2"><button class="btn btn-primary delbtn" data-id="{{mealplan.id}}">delete</button></span></h2>
         </div>
         <div class="card-body">
             <p class="card-text">Created by: {{mealplan.creator}}</p>
@@ -17,3 +17,5 @@
     </div>
     {{/each}}
 </div>
+
+<script src="/js/profile.js"></script>
