@@ -192,6 +192,10 @@ router.post('/createplan/test', async (req, res) => {
             )
         };
 
+        const user = await User.findByPk(req.session.user_id);
+
+        user.addMealplan(newPlan)
+
         res.status(200).json(newPlan)
 
     } catch (err) {
@@ -238,6 +242,8 @@ router.get('/view/allmeals', async (req, res) => {
         res.status(500).json(err)
     }
 });
+
+
 // todos
 // front end restyling, loop
 // better seed data

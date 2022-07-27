@@ -2,9 +2,18 @@
     <div class="container">
         <div class="row p-1">
 {{#if logged_in}}
-<div>
-    <button type="button" class="btn btn-primary" id="createPlan">Create Plan</button>
-</div>
+<form class="my-2">
+  <div class="form-group">
+    <label for="planName">Name</label>
+    <input type="text" class="form-control" id="planName" placeholder="My plan">
+    <small id="emailHelp" class="form-text text-muted">Please name your new mealplan</small>
+  </div>
+  <div class="form-group">
+    <label for="planCreator">Creator</label>
+    <input type="text" class="form-control" id="planCreator" placeholder="Anonymous">
+  </div>
+  <button type="submit" class="btn btn-primary" id="createPlan">Create Plan</button>
+</form>
     {{else}}
 <div>
     <h1>must be logged in to create a plan</h1>
@@ -12,21 +21,19 @@
     {{/if}}
     {{#each meals as |meal| }}
     <div class="card col-sm shadow-lg" id="mealCard">
-        <div class="container">
-        <div class="row">
-            <div class="col w-75 text-center">
-                <h3 class="my-3">{{meal.name}}</h3>
+        <div class="card-body d-flex flex-column">
+            <div class="text-center">
+                <h3 class="my-3 card-title">{{meal.name}}</h3>
             </div>
-            <div class="col-sm text-center my-auto">
-                <button type="button" class="btn btn-primary addBtn" data-id={{meal.id}}>Add to Mealplan</button>
+            <div class="align-self-end mt-auto mx-auto mb-0">
+                <p class="card-text">Click to view recipe!</p>
+            </div>
+            <div class="align-self-end text-center mt-auto mx-auto">
+                <button type="button" class="btn btn-primary" id="addBtn" data-id={{meal.id}}>Add to Mealplan</button>
             </div>
             {{!-- <div class="col-sm text-center align-bottom">
                 <button type="button" class="btn btn-primary addBtn" data-id={{meal.id}}>Add to Mealplan</button>
             </div> --}}
-        </div>
-        <div class="text-center">
-            <p>Click for more info!</p>
-        </div>
         </div>
     </div>
     {{/each}}
