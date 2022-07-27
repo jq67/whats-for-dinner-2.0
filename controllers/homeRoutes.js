@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
       order: [
           ['count', 'DESC']
       ]
-  });
+    });
 
   const meals = mealCount.map((meal) => meal.get({ plain: true }))
 

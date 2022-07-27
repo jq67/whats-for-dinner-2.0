@@ -48,6 +48,12 @@ router.post('/mealplan/:planid/', async (req, res) => {
 
         user.addMealplan(req.params.planid)
 
+        const plan = await Mealplan.findByPk(req.params.planid)
+
+        plan.increment({
+            count: 1
+        })
+
         res.status(200).json(user)
     } catch (err) {
         res.status(500).json(err)
@@ -193,9 +199,45 @@ router.post('/createplan/test', async (req, res) => {
     }
 });
 
+router.get('/mealplans/count', async (req, res) => {
+    try {
+        const planCount = await Mealplan.findAll({
+            limit: 5,
+            order: [
+                ['count', 'DESC']
+            ]
+        });
 
+        res.status(200).json(planCount)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
 
+router.get('/meals/count', async (req, res) => {
+    try {
+        const mealCount = await Meal.findAll({
+            limit: 5,
+            order: [
+                ['count', 'DESC']
+            ]
+        });
 
+        res.status(200).json(mealCount)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
+
+router.get('/view/allmeals', async (req, res) => {
+    try {
+        const meals = await Meal.findAll()
+
+        res.status(200).json(meals)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
 // todos
 // front end restyling, loop
 // better seed data

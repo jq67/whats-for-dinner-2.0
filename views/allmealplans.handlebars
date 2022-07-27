@@ -1,23 +1,21 @@
-<div class="card w-75 mx-auto mt-3 bloo2" id="homeCard">
-<div>
-    <button type="button" class="btn btn-primary" id="createPlan">Create Plan</button>
-</div>
+<div class="w-75 mx-auto mt-3 bloo2" id="homeCard">
+    <div class="container">
+        <div class="row p-1">
     {{#each plans as |plan| }}
-    <div class="card col-sm shadow-lg" style="border-radius:25px;" id="mealCard">
+    <div class="card col-sm shadow-lg" id="mealCard">
         <div class="container">
         <div class="row">
             <div class="w-75 text-center">
-                <h1>{{plan.name}}</h1>
-                <p>Click for more Info!</p>
+                <h1 class="my-3">{{plan.name}}</h1>
             </div>
             <div class="col-sm text-center my-auto">
                 <button type="button" class="btn btn-primary addBtn" data-id={{plan.id}}>Add to Profile</button>
-                <p class="d-none">{{plan.id}}</p>
+                {{!-- <p class="d-none">{{plan.id}}</p> --}}
             </div>
             {{#if plan.meals}}
             <ul>
             {{#each plan.meals as |meal|}}
-            <li>{{meal.name}}</li>
+            <li class="lists my-1">{{meal.name}}</li>
             {{/each}}
             </ul>
             {{else}}
@@ -29,6 +27,8 @@
         </div>
     </div>
     {{/each}}
+        </div>
+    </div>
 </div>
 
 <script src="/js/mealplan.js"></script>

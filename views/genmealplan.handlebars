@@ -1,23 +1,37 @@
 <div class="card w-75 mx-auto mt-3 bloo2" id="homeCard">
+    <div class="container">
+        <div class="row p-1">
+{{#if logged_in}}
 <div>
     <button type="button" class="btn btn-primary" id="createPlan">Create Plan</button>
 </div>
+    {{else}}
+<div>
+    <h1>must be logged in to create a plan</h1>
+</div>
+    {{/if}}
     {{#each meals as |meal| }}
-    <div class="card col-sm shadow-lg" style="border-radius:25px;" id="mealCard">
+    <div class="card col-sm shadow-lg" id="mealCard">
         <div class="container">
         <div class="row">
-            <div class="w-75 text-center">
-                <h1>{{meal.name}}</h1>
-                <p>Click for more Info!</p>
+            <div class="col w-75 text-center">
+                <h3 class="my-3">{{meal.name}}</h3>
             </div>
             <div class="col-sm text-center my-auto">
                 <button type="button" class="btn btn-primary addBtn" data-id={{meal.id}}>Add to Mealplan</button>
-                <p class="d-none">{{meal.name}}</p>
             </div>
+            {{!-- <div class="col-sm text-center align-bottom">
+                <button type="button" class="btn btn-primary addBtn" data-id={{meal.id}}>Add to Mealplan</button>
+            </div> --}}
+        </div>
+        <div class="text-center">
+            <p>Click for more info!</p>
         </div>
         </div>
     </div>
     {{/each}}
+    </div>
+    </div>
 </div>
 
 <script src="/js/meals.js"></script>

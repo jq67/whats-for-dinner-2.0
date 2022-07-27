@@ -18,7 +18,7 @@
     
     border-width: 10px;
     background-color: rgb(34, 25, 25);
-    border-radius:25px;
+    /* border-radius:25px; */
 }
 
 #asideSctn {
@@ -30,11 +30,12 @@
 .footer {
     background-color: rgb(34, 25, 25);
     color: white;
-    /* font-family:  */
+    min-height: 190px;
+
 }
 
-.header {
-    
+#bodybottom {
+    margin-bottom: 190px;
 }
 
 #popMeals {
@@ -115,3 +116,8 @@
     background-color: rgb(212, 247, 212);
     border-radius:25px;
 }
+
+.lists {
+    list-style-type: none;
+}
+
