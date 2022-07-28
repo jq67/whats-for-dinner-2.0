@@ -1,5 +1,9 @@
+// array of meals to add to plan
 let meals = [];
 
+let createBtn = document.querySelector('#createPlan');
+
+// event listener to update meal array
 const addToPlan = (e) => {
     e.preventDefault();
     e.target.textContent = "Added to Plan!"
@@ -12,6 +16,7 @@ const addToPlan = (e) => {
     return
 };
 
+// event listener to update meal array
 const removeFromPlan = (e) => {
     e.preventDefault();
     e.target.textContent = "Removed from Plan!"
@@ -26,12 +31,7 @@ const removeFromPlan = (e) => {
     return
 };
 
-document.querySelectorAll('#addBtn').forEach((btn) => {
-    btn.addEventListener('click', addToPlan)
-});
-
-let createBtn = document.querySelector('#createPlan');
-
+// event listener to create plan with meal array and creator/name fields
 const createPlan = async (event) => {
     event.preventDefault();
 
@@ -39,9 +39,25 @@ const createPlan = async (event) => {
 
     let name = document.querySelector('#planName').value.trim();
 
-    // console.log(creator)
-    // console.log(name)
-    // console.log(meals)
+    console.log(creator)
+
+    console.log(name)
+
+    if (creator == '') {
+        alert("Creator field should not be empty")
+        return
+    }
+
+    if (name == '') {
+        alert("Name field should not be empty")
+        return
+    }
+
+    if (meals.length == 0) {
+        alert("Please select atleast one meal to add to the plan")
+        return
+    }
+
     const response = await fetch('/api/plan/new', {
         method: 'POST',
         body: JSON.stringify(
@@ -57,11 +73,14 @@ const createPlan = async (event) => {
     if (response.ok) {
         // If successful, redirect the browser to the profile page
         alert("Plan created sucessfully!")
-        document.location.replace('/api/test/userplans');
-        // console.log(creator, name, meals)
+        document.location.replace('/api/users/profile');
     } else {
         alert(response.statusText);
     };
 };
 
 createBtn.addEventListener('click', createPlan);
+
+document.querySelectorAll('#addBtn').forEach((btn) => {
+    btn.addEventListener('click', addToPlan)
+});

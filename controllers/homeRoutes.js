@@ -33,7 +33,6 @@ router.get('/', async (req, res) => {
 // render login page
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
-    window.alert('You are currently logged in');
     res.redirect('/');
     return;
   }
@@ -43,7 +42,6 @@ router.get('/login', (req, res) => {
 // render register page
 router.get('/register', (req, res) => {
   if (req.session.logged_in) {
-    window.alert('You are currently logged in');
     res.redirect('/');
     return;
   }

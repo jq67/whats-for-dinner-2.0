@@ -12,7 +12,7 @@ const deletePostHandler = async (event) => {
     
         if (response.ok) {
             // If successful, redirect the browser to the profile page
-            document.location.replace('/api/test/userplans');
+            document.location.replace('/api/users/profile');
         } else {
             console.log(response);
         };

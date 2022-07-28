@@ -1,41 +1,65 @@
+# What's for Dinner? ![Mit License](https://img.shields.io/badge/License-Mit%20License-brightgreen)
 
-# What's For Dinner?
-## ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) 
-    
+## Description
+
+### What does What's for Dinner? do?
+
+This project allows users to create and share mealplans from a database of meals. This project also uses a npm recipe scraper package to allow users to view recipes for each meal that is part of the database.
+
+
+
+
+
 ## Table of Contents
-- [Description](#description)
-- [Mock-Up](#mock-up)
+
 - [Installation](#installation)
 - [Usage](#usage)
-- [License](#license)
-- [Contribution Guidelines](#contribution-guidelines)
-- [Tests](#tests)
+- [Credits](#credits)
+- [Contribution](#contribution)
 - [Questions](#questions)
-    
-## [Description](#table-of-contents)
-What's For Dinner is a Full-Stack 7-Meal Planner and a helpful addition to any user's meal-prep arsenal. Be it someone that works long hours and is too tired to think of new meal ideas constantly or an indecisive food-lover that wants to try new recipes, 7 Meal Planner helps alleviate the stress of searching for new meals by randomly generating meal ideas for you! It uses the recipe-scraper npm package to scour supported websites and pull all the useful information you need into one place for easy reference and to save user’s from scanning through the sometimes endless scrolling of recipe blogs. In addition to users having a secure profile to access and add, update or delete a meal plan, through clicking on a chosen meal in their plan, users are able to visit a recipe card with a comment section where they can post feedback, likes or dislikes to share with other users.
+- [Licence](#licence)
 
-## [Mock-Up](#table-of-contents)
-(screen shot of landing page profile page recipe card)
-(gif of application functionality)
+---
 
-## [Installation](#table-of-contents)
-1.	Npm install
-2.	Initialize database via mysql : source db/schema.sql after mysql login, then quit mysql
-3.  Npm run seed to seed database
-4.  Node server.js to launch localhost
+## Installation 
 
-## [License](#table-of-contents)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-[MIT](https://opensource.org/licenses/MIT)
+### Technologies Used in Development
 
-## [Contribution Guidelines](#table-of-contents)
-Currently, this application is not accepting any contributions.
+Technologies used include:
 
-## [Tests](#table-of-contents)
-Currently, there is no test suite created for this application. 
+This project is a fullstack project that uses express, express-session, express-handlebars, mysql, sequelize and a recipe scraper package.
 
-## [Questions](#table-of-contents)
-Contact me through [GitHub](https://github.com/)
-Contact me through email at: [](mailto:)
-    
+### Installation Instructions
+
+```md
+create a .env file with your sql credentials. In the root of the project run mysql and type source ./db/schema.sql; then quit. Run npm install and then npm run seed from the terminal and then npm run start to start the project.
+```
+
+## Usage
+
+![project screenshot](./example.png)
+
+```md
+First the user should create an account. Then the user can view mealplans to add to their account, create new mealplans, or view recipes for the various meals on the database.
+```
+
+## Credits
+
+The original unfinished project was started by github users jacih, Jeungs and myself.
+
+## Contribution
+
+Guidelines for contribution:
+
+Next steps for development are tags for meals and plans to be able to search efficiently, a way for users to submit new meals/recipes, and a calendar that would be able to be used to keep track of upcoming meals.
+
+## Questions
+
+No contact please
+
+https://github.com/jq67
+
+
+---
+## Licence
+This project is covered under the `Mit License`

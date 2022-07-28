@@ -15,32 +15,18 @@ router.post('/add/:planid/', withAuth, async (req, res) => {
 
         // loop to check if user already has plan
         for (let i = 0; i < user.mealplans.length; i++) {
-            if (user.mealplans.length == 0) {
-                user.addMealplan(req.params.planid)
-
-                const plan = await Mealplan.findByPk(req.params.planid)
-
-                plan.increment({
-                    count: 1
-                });
-
-                return res.status(200).json(user)
-
-            } else if (user.mealplans[i].id == req.params.planid) {
+            if (user.mealplans[i].id == req.params.planid) {
                 return res.status(400).json(user)
+            }
+        }
 
-            } else if (i == user.mealplans.length-1) {         
-                user.addMealplan(req.params.planid)
+        user.addMealplan(req.params.planid)
 
-                const plan = await Mealplan.findByPk(req.params.planid)
+        const plan = await Mealplan.findByPk(req.params.planid)
 
-                plan.increment({
-                    count: 1
-                });
-
-                return res.status(200).json(user)
-            };
-        };
+        plan.increment({
+            count: 1
+        });
 
         res.status(200).json(user)
     } catch (err) {
@@ -61,7 +47,7 @@ router.delete('/remove/:planid', async (req, res) => {
     }
 });
 
-// create plan add meals, final route, need to add session logged in params, will have to add user.addMealplan
+// create plan and add meals to created plan
 router.post('/new', withAuth, async (req, res) => {
     try {
         const newPlan = await Mealplan.create({
@@ -110,7 +96,7 @@ router.get('/allmeals', async (req,res) => {
 
         const meals = mealData.map((meal) => meal.get({plain: true}))
 
-        res.render('genmealplan', { meals, logged_in: req.session.logged_in, user_id: req.session.user_id })
+        res.render('allmeals', { meals, logged_in: req.session.logged_in, user_id: req.session.user_id })
     } catch (err) {
         res.status(500).json(err)
     }
@@ -129,7 +115,7 @@ router.get('/allplans', async (req,res) => {
 
         const plans = planData.map((plan) => plan.get({plain: true}))
 
-        console.log(req.session.user_id)
+        console.log(req.session.logged_in)
 
         res.render('allmealplans', { plans, logged_in: req.session.logged_in, user_id: req.session.user_id })
     } catch (err) {

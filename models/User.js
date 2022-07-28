@@ -35,16 +35,6 @@ User.init(
         isEmail: true
       }
     },
-    // favoriteFood: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
-    // planlist: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    //   defaultValue: '',
-
-    // },
   },
   {
     hooks: {
@@ -56,7 +46,6 @@ User.init(
         updatedUser.password = await bcrypt.hash(updatedUser.password, 10);
         return updatedUser;
       },
-      // should we include an update fave food hook?
   },
     sequelize,
     timestamps: false,

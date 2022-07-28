@@ -4,9 +4,6 @@ const addToProfile = async (e) => {
     const response = await fetch(`/api/plan/add/${planid}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // body: JSON.stringify(
-
-        // )
     });
 
     if (response.status == 400) {
@@ -18,9 +15,8 @@ const addToProfile = async (e) => {
     } else {
         e.target.textContent = "Something went wrong"
         alert(response.statusText);
-    }
-
-}
+    };
+};
 
 document.querySelectorAll('.addBtn').forEach((btn) => {
     btn.addEventListener('click', addToProfile)
