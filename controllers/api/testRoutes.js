@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Meal, User, Mealplan } = require('../../models');
-const withAuth = require('../../utils/auth');
+// const withAuth = require('../../utils/auth');
 const recipeScraper = require("recipe-scraper");
 
 // get all users
@@ -16,31 +16,31 @@ router.get('/allusers', async (req,res) => {
     }
 })
 
-// create mealplan, will use req.session.user_id for creator field
-router.post('/mealplan/create', async (req, res) => {
-    try {
-        const newPlan = await Mealplan.create({
-            name: req.body.name,
-            creator: req.body.creator,
-        });
-        res.status(200).json(newPlan)
-    } catch (err) {
-        res.status(500).json(err)
-    }
-});
+// // create mealplan, will use req.session.user_id for creator field
+// router.post('/mealplan/create', async (req, res) => {
+//     try {
+//         const newPlan = await Mealplan.create({
+//             name: req.body.name,
+//             creator: req.body.creator,
+//         });
+//         res.status(200).json(newPlan)
+//     } catch (err) {
+//         res.status(500).json(err)
+//     }
+// });
 
-// adding meals to mealplan
-router.post('/mealplan/create/:id', async (req, res) => {
-    try {
-        const addMeal = await Mealjoinplan.create({
-            meal_id: req.body.meal_id,
-            mealplan_id: req.params.id,
-        });
-        res.status(200).json(addMeal)
-    } catch (err) {
-        res.status(500).json(err)
-    }
-});
+// // adding meals to mealplan
+// router.post('/mealplan/create/:id', async (req, res) => {
+//     try {
+//         const addMeal = await Mealjoinplan.create({
+//             meal_id: req.body.meal_id,
+//             mealplan_id: req.params.id,
+//         });
+//         res.status(200).json(addMeal)
+//     } catch (err) {
+//         res.status(500).json(err)
+//     }
+// });
 
 // adding mealplan to user, will use req.sesson.user_id
 router.post('/mealplan/:planid/', async (req, res) => {
@@ -53,9 +53,19 @@ router.post('/mealplan/:planid/', async (req, res) => {
                 }
             ]
         });
-        
+
         for (let i = 0; i < user.mealplans.length; i++) {
-            if (user.mealplans[i].id == req.params.planid) {
+            if (user.mealplans.length == 0) {
+                user.addMealplan(req.params.planid)
+
+                const plan = await Mealplan.findByPk(req.params.planid)
+
+                plan.increment({
+                    count: 1
+                });
+
+                return res.status(200).json(user)
+            } else if (user.mealplans[i].id == req.params.planid) {
                 return res.status(400).json(user)
             } else if (i == user.mealplans.length-1) {         
                 user.addMealplan(req.params.planid)
@@ -70,6 +80,7 @@ router.post('/mealplan/:planid/', async (req, res) => {
             };
         };
 
+        res.status(200).json(user)
     } catch (err) {
         res.status(500).json(err)
     }
@@ -164,7 +175,7 @@ router.get('/allplans', async (req,res) => {
 });
 
 // render user profile, final route, add session, logged in params
-router.get('/userplans', withAuth, async (req,res) => {
+router.get('/userplans', async (req,res) => {
     try {
         const userData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] },
@@ -190,7 +201,7 @@ router.get('/userplans', withAuth, async (req,res) => {
 });
 
 // create plan add meals, final route, need to add session logged in params, will have to add user.addMealplan
-router.post('/createplan/test', async (req, res) => {
+router.post('/createplan/test/', async (req, res) => {
     try {
         const newPlan = await Mealplan.create({
             name: req.body.name,
@@ -231,45 +242,45 @@ router.post('/createplan/test', async (req, res) => {
     }
 });
 
-router.get('/mealplans/count', async (req, res) => {
-    try {
-        const planCount = await Mealplan.findAll({
-            limit: 5,
-            order: [
-                ['count', 'DESC']
-            ]
-        });
+// router.get('/mealplans/count', async (req, res) => {
+//     try {
+//         const planCount = await Mealplan.findAll({
+//             limit: 5,
+//             order: [
+//                 ['count', 'DESC']
+//             ]
+//         });
 
-        res.status(200).json(planCount)
-    } catch (err) {
-        res.status(500).json(err)
-    }
-})
+//         res.status(200).json(planCount)
+//     } catch (err) {
+//         res.status(500).json(err)
+//     }
+// })
 
-router.get('/meals/count', async (req, res) => {
-    try {
-        const mealCount = await Meal.findAll({
-            limit: 5,
-            order: [
-                ['count', 'DESC']
-            ]
-        });
+// router.get('/meals/count', async (req, res) => {
+//     try {
+//         const mealCount = await Meal.findAll({
+//             limit: 5,
+//             order: [
+//                 ['count', 'DESC']
+//             ]
+//         });
 
-        res.status(200).json(mealCount)
-    } catch (err) {
-        res.status(500).json(err)
-    }
-});
+//         res.status(200).json(mealCount)
+//     } catch (err) {
+//         res.status(500).json(err)
+//     }
+// });
 
-router.get('/view/allmeals', async (req, res) => {
-    try {
-        const meals = await Meal.findAll()
+// router.get('/view/allmeals', async (req, res) => {
+//     try {
+//         const meals = await Meal.findAll()
 
-        res.status(200).json(meals)
-    } catch (err) {
-        res.status(500).json(err)
-    }
-});
+//         res.status(200).json(meals)
+//     } catch (err) {
+//         res.status(500).json(err)
+//     }
+// });
 
 // recipe route
 router.get('/:mealid/recipe', async (req, res) => {
@@ -289,7 +300,8 @@ router.get('/:mealid/recipe', async (req, res) => {
 
 // todos
 // better seed data
-// add checks and preventions to buttons / routes
-// add recipe route
+// add checks and preventions to buttons / routes *double check everything is covered*
+// refactor code and routes
+// push to heroku
 
 module.exports = router;

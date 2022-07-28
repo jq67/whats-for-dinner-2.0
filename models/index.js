@@ -16,10 +16,12 @@ Mealplan.belongsToMany(User, {
 
 Mealplan.belongsToMany(Meal, {
   through: 'Mealjoinplan',
+  onDelete: 'NO ACTION',
 });
 
 Meal.belongsToMany(Mealplan, {
   through: 'Mealjoinplan',
+  onDelete: 'NO ACTION',
 });
 
 module.exports = { User, Meal, Mealplan };

@@ -134,12 +134,8 @@ a:hover {
     text-decoration: none;
 }
 
-#recipeimg{
+#recipeimg {
     display: block;
     max-width: 100%;
     height: auto;
-}
-
-.recipeHead {
-    font-size: xx-large;
 }

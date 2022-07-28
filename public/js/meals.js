@@ -39,6 +39,9 @@ const createPlan = async (event) => {
 
     let name = document.querySelector('#planName').value.trim();
 
+    // console.log(creator)
+    // console.log(name)
+    // console.log(meals)
     const response = await fetch('/api/test/createplan/test', {
         method: 'POST',
         body: JSON.stringify(
@@ -58,8 +61,7 @@ const createPlan = async (event) => {
         // console.log(creator, name, meals)
     } else {
         alert(response.statusText);
-        console.log("error)")
     };
 };
 
-createBtn.addEventListener('submit', createPlan);
+createBtn.addEventListener('click', createPlan);
