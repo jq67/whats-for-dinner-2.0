@@ -1,27 +1,9 @@
 const router = require('express').Router();
 const { User, Meal, Mealplan } = require('../models');
-const withAuth = require ('../utils/auth');
+const recipeScraper = require("recipe-scraper");
+const withAuth = require('../utils/auth');
 
-router.get('/meals', async (req, res) => {
-  try {
-    const mealData = await Meal.findAll();
-
-    res.status(200).json(mealData)
-  } catch (err) {
-    res.status(500).json(err)
-  }
-});
-
-router.get('/users', async (req, res) => {
-  try {
-    const userData = await User.findAll();
-
-    res.status(200).json(userData)
-  } catch (err) {
-    res.status(500).json(err)
-  }
-});
-
+// render homepage
 router.get('/', async (req, res) => {
   try {
     const planCount = await Mealplan.findAll({
@@ -48,6 +30,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// render login page
 router.get('/login', (req, res) => {
   if (req.session.logged_in) {
     window.alert('You are currently logged in');
@@ -57,6 +40,7 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+// render register page
 router.get('/register', (req, res) => {
   if (req.session.logged_in) {
     window.alert('You are currently logged in');
@@ -64,6 +48,22 @@ router.get('/register', (req, res) => {
     return;
   }
   res.render('register');
+});
+
+// recipe route
+router.get('/:mealid/recipe', withAuth, async (req, res) => {
+  try {
+      const meal = await Meal.findByPk(req.params.mealid)
+
+      console.log(meal.recipe_url)
+
+      const recipe = await recipeScraper(meal.recipe_url)
+
+      // res.status(200).json(recipe)
+      res.render('recipe', {recipe, logged_in: req.session.logged_in, user_id: req.session.user_id })
+  } catch (err) {
+      res.status(500).json(err)
+  }
 });
 
 module.exports = router;

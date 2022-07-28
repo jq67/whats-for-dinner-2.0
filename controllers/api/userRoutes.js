@@ -1,10 +1,6 @@
 const router = require('express').Router();
 const { Meal, User, Mealplan } = require('../../models');
-
-const format_mealList = (string) => {
-  let list = string.split(',')
-  return list
-}
+const withAuth = require('../../utils/auth');
 
 // post route to create user
 router.post('/', async (req,res) => {
@@ -63,88 +59,30 @@ router.post('/logout', (req, res) => {
   }
 });
 
-// renders all posts on homepage
-router.get('/mealplan', async (req, res) => {
+// render user profile, final route, add session, logged in params
+router.get('/profile', withAuth, async (req,res) => {
   try {
-    const mealData = await Meal.findAll();
+      const userData = await User.findByPk(req.session.user_id, {
+          attributes: { exclude: ['password'] },
+          include: [
+              {
+                  model: Mealplan,
+                  include: [
+                      {
+                          model: Meal,
+                      }
+                  ]
+              }
+          ]
+      });
 
-    const meals = mealData.map((meal) => meal.get({ plain: true }));
+      const user = userData.get({ plain: true });
 
-    res.render('genmealplan', { meals, logged_in: req.session.logged_in, user_id : req.session.user_id });
+      // res.status(200).json(user)
+      res.render('profile', { user, logged_in: req.session.logged_in, user_id: req.session.user_id })
   } catch (err) {
-    res.status(500).json(err)
+      res.status(500).json(err)
   }
 });
-
-// create mealplan testing
-router.get('/mealtest', async (req, res) => {
-  try {
-    const planData = await Mealplan.findAll();
-
-    const plans = planData.map((plan) => plan.get({ plain: true }));
-
-    const mealArr = plans[0].meals.split(",").map(Number);
-
-    const planMeals = await Meal.findAll({
-      where: {
-        id: mealArr
-      }
-    });
-    
-    const finalData = planMeals.map((meal) => meal.get({ plain: true }));
-    
-
-    res.status(200).json(finalData)
-  } catch (err) {
-    res.status(500).json(err)
-  }
-})
-
-// get users plans
-router.get('/:id' , async (req,res) => {
-  try {
-      const userData = await User.findOne({ where: { id: req.params.id } })
-
-      const meallist = userData.planlist.split(',')
-
-      const planData = await Mealplan.findAll({
-        where: {
-          id: meallist
-        }
-      })
-
-      const plans = planData.map((plan) => plan.get({ plain:true }))
-
-      const testList = planData.map((plan) => plan.meals.split(','))
-
-      console.log(JSON.stringify(testList))
-      console.log(plans)
-
-      // res.render('profile', { plans } )
-      res.status(200).json(plans)
-  } catch (err) {
-      res.status(500).json(err);
-  }
-});
-
-router.post('/:id', async (req,res) => {
-  try {
-    const userData = await User.findOne(
-      { where: { id: req.params.id } }
-    )
-    
-    if (userData.planlist == '') {
-      userData.planlist += `${req.body.planlist}`
-    } else {
-    userData.planlist += `, ${req.body.planlist}`
-    }
-
-    await userData.save();
-    
-    res.status(200).json(userData)
-  } catch (err) {
-    res.status(500).json(err)
-  }
-})
 
 module.exports = router;

@@ -6,7 +6,7 @@ const deletePostHandler = async (event) => {
         // Collect values from the login form
          
         // Send a POST request to the API endpoint
-        const response = await fetch(`/api/test/mealplan/${id}`, {
+        const response = await fetch(`/api/plan/remove/${id}`, {
             method: 'DELETE',
         });
     

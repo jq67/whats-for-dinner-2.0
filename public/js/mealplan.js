@@ -1,7 +1,7 @@
 const addToProfile = async (e) => {
     const planid = e.target.getAttribute('data-id');
 
-    const response = await fetch(`/api/test/mealplan/${planid}`, {
+    const response = await fetch(`/api/plan/add/${planid}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         // body: JSON.stringify(

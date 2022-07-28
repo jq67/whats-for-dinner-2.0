@@ -1,8 +1,6 @@
 const User = require('./User');
 const Meal = require('./Meal');
 const Mealplan = require('./Mealplan');
-// const Mealjoinplan = require('./MealjoinPlan');
-// const Userjoinplan = require('./UserjoinPlan');
 
 User.belongsToMany(Mealplan, {
   through: 'Userjoinplan',

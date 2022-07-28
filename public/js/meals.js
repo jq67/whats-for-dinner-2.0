@@ -42,7 +42,7 @@ const createPlan = async (event) => {
     // console.log(creator)
     // console.log(name)
     // console.log(meals)
-    const response = await fetch('/api/test/createplan/test', {
+    const response = await fetch('/api/plan/new', {
         method: 'POST',
         body: JSON.stringify(
             {
