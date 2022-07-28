@@ -1,32 +1,25 @@
 <div class="w-75 mx-auto mt-3 bloo2" id="homeCard">
     <div class="container">
-        <div class="row p-1">
-    {{#each plans as |plan| }}
-    <div class="card col-sm shadow-lg" id="mealCard">
-        <div class="container">
-        <div class="row">
-            <div class="w-75 text-center">
-                <h1 class="my-3">{{plan.name}}</h1>
+    <div class="row p-1">
+        {{#each plans as |plan| }}
+            <div class="card col-sm shadow-lg" id="mealCard">
+                <div class="container">
+                <div class="row">
+                    <div class="w-75 text-center">
+                        <h1 class="my-3">{{plan.name}}</h1>
+                    </div>
+                    <div class="col-sm text-center my-auto">
+                        <button type="button" class="btn btn-primary addBtn" data-id={{plan.id}}>Add to Profile</button>
+                    </div>
+                    <ul>
+                        {{#each plan.meals as |meal|}}
+                            <li class="lists my-1"><a href="/api/test/{{meal.id}}/recipe">{{meal.name}}</a></li>
+                        {{/each}}
+                    </ul>
+                </div>
+                </div>
             </div>
-            <div class="col-sm text-center my-auto">
-                <button type="button" class="btn btn-primary addBtn" data-id={{plan.id}}>Add to Profile</button>
-                {{!-- <p class="d-none">{{plan.id}}</p> --}}
-            </div>
-            {{#if plan.meals}}
-            <ul>
-            {{#each plan.meals as |meal|}}
-            <li class="lists my-1"><a href="/api/test/{{meal.id}}/recipe">{{meal.name}}</a></li>
-            {{/each}}
-            </ul>
-            {{else}}
-            <div>
-                <p>none</p>
-            </div>
-            {{/if}}
-        </div>
-        </div>
-    </div>
-    {{/each}}
+        {{/each}}
         </div>
     </div>
 </div>

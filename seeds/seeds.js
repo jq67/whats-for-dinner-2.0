@@ -12,11 +12,11 @@ const seedDatabase = async () => {
       returning: true,
   });
 
-  await Meal.bulkCreate(mealData)
+  await Meal.bulkCreate(mealData);
 
-  await Mealplan.bulkCreate(mealplanData)
+  await Mealplan.bulkCreate(mealplanData);
 
   process.exit(0);
-}
+};
 
 seedDatabase();

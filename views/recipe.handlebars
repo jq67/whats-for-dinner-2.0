@@ -2,36 +2,36 @@
     <div class="card w-75 my-3 mx-auto h-auto shadow-lg" id="recipeCard">
         <div class="card-body">
             <h1 class="text-center m-2 bloo2">{{recipe.name}}</h1>
-            <div>
             <div class="pbor"></div>
-            <p class="py-3 bloo2">{{recipe.description}}</p>
-            <img id="recipeimg" src="{{recipe.image}}" alt="{{recipe.description}}" class="image-fluid">
+            <div>
+                <p class="py-3 bloo2">{{recipe.description}}</p>
+                <img id="recipeimg" src="{{recipe.image}}" alt="{{recipe.description}}" class="image-fluid">
             </div>
             <div>
-            <h1 class="merckScript my-4 mx-3">Ingredients</h1>
-            <div class="pbor"></div>
-            <ul>
-            {{#each recipe.ingredients as |ingredient|}}
-            <li class="bloo2 py-3">{{ingredient}}</li>
-            {{/each}}
+                <h1 class="merckScript my-4 mx-3">Ingredients</h1>
+                <div class="pbor"></div>
+                <ul>
+                {{#each recipe.ingredients as |ingredient|}}
+                    <li class="bloo2 py-3">{{ingredient}}</li>
+                {{/each}}
+                </ul>
             </div>
             <div>
-            <h1 class="merckScript my-4 mx-3">Preparation</h1>
-            <div class="pbor"></div>
-            {{#each recipe.instructions as |instruction|}}
-            <p class="bloo2 py-3">{{instruction}}</p>
-            {{/each}}
+                <h1 class="merckScript my-4 mx-3">Preparation</h1>
+                <div class="pbor"></div>
+                {{#each recipe.instructions as |instruction|}}
+                    <p class="bloo2 py-3">{{instruction}}</p>
+                {{/each}}
             </div>
             <div>
-            <h2 class="merckScript my-4 mx-3">Other info</h2>
-            <div class="pbor"></div>
-            <p class="bloo2 py-3">Prep: {{recipe.time.prep}}</p>
-            <p class="bloo2 py-3">Cook: {{recipe.time.cook}}</p>
-            <p class="bloo2 py-3">Servings: {{recipe.servings}}</p>
+                <h2 class="merckScript my-4 mx-3">Other info</h2>
+                <div class="pbor"></div>
+                <p class="bloo2 py-3">Prep: {{recipe.time.prep}}</p>
+                <p class="bloo2 py-3">Cook: {{recipe.time.cook}}</p>
+                <p class="bloo2 py-3">Servings: {{recipe.servings}}</p>
             </div>
         </div>
     </div>
 </div>
 
 
-{{!-- can have another div down here if we have a way to find related recipes, or any other info maybe comment section since no more chat? --}}

@@ -10,7 +10,7 @@
             <p class="card-text">Created by: {{mealplan.creator}}</p>
             <ul class="card-text">
                 {{#each mealplan.meals as |meal|}}
-                <li class="lists my-1"><a href="/api/test/{{meal.id}}/recipe">{{meal.name}}</a></li>
+                    <li class="lists my-1"><a href="/api/test/{{meal.id}}/recipe">{{meal.name}}</a></li>
                 {{/each}}
             </ul>
         </div>

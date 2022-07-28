@@ -14,16 +14,14 @@
     font-family: 'Marck Script', cursive;
 
 }
+
 #headSctn {
-    
     border-width: 10px;
     background-color: rgb(34, 25, 25);
-    /* border-radius:25px; */
 }
 
 #asideSctn {
     background-color: rgb(34, 25, 25);
-    border-radius:25px;
     color: white;
 }
 
@@ -57,7 +55,7 @@
 }
 
 #logoutbtn {
-
+    width: 100px;
 }
 
 .footer h5 {
@@ -83,6 +81,7 @@
     min-width: 50%;
     max-width: 50%;
 }
+
 #recipeCard {
     background-color: rgb(247, 247, 208);
     border-radius: 25px;
