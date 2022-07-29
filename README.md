@@ -3,11 +3,9 @@
 ## Description
 
 ### What does What's for Dinner? do?
+https://whatsfordinner-v2.herokuapp.com/
 
 This project allows users to create and share mealplans from a database of meals. This project also uses a npm recipe scraper package to allow users to view recipes for each meal that is part of the database.
-
-
-
 
 
 ## Table of Contents
@@ -37,6 +35,8 @@ create a .env file with your sql credentials. In the root of the project run mys
 
 ## Usage
 
+https://whatsfordinner-v2.herokuapp.com/
+
 ![project screenshot](./example.png)
 
 ```md
@@ -59,7 +59,7 @@ No contact please
 
 https://github.com/jq67
 
-
+https://whatsfordinner-v2.herokuapp.com/
 ---
 ## Licence
 This project is covered under the `Mit License`
